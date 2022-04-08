@@ -11,6 +11,7 @@ import com.project.jobportal.entity.UserEntity;
 import com.project.jobportal.repository.ApplyRepository;
 import com.project.jobportal.repository.HiringRepository;
 import com.project.jobportal.repository.UserRepository;
+import com.project.jobportal.response.PostResponse;
 import com.project.jobportal.response.ResponseBody;
 import com.project.jobportal.response.UserResponse;
 
@@ -53,11 +54,26 @@ public class AdminService {
 	
 	
 	public ResponseEntity<ResponseBody> findAllPost() {
-		List<HrHiring> hire=hireRepo.findAll();
-		if(hire.equals(null)) {
+		List<HrHiring> hireList=hireRepo.findAll();
+		if(hireList.equals(null)) {
 			return ResponseEntity.ok(new ResponseBody("POST JOBS","NOT AVAILABLE",null));
 		}
-		return ResponseEntity.ok(new ResponseBody("YES","POST JOBS AVAILABLE",hire));
+		List<PostResponse> list=new ArrayList();
+		PostResponse post;
+		for (HrHiring hiring : hireList) {
+			post=new PostResponse();
+			post.setHrId(hiring.getHrId());
+			post.setBranch(hiring.getBranch());
+			post.setRole(hiring.getRole());
+			post.setWorkingHours(hiring.getWorkingHours());
+			post.setDateOfPosting(hiring.getDateOfPosting());
+			post.setNoOfApplicants(hiring.getNoOfApplicants());
+			post.setCtc(hiring.getCtc());
+			post.setLocation(hiring.getLocation());
+			post.setExperience(hiring.getExperience());
+			list.add(post);
+		}
+		return ResponseEntity.ok(new ResponseBody("YES","POST JOBS AVAILABLE",list));
 	}
 	
 	
