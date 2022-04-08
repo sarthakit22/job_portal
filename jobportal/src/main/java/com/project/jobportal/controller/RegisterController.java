@@ -34,7 +34,7 @@ public class RegisterController {
 	}
 	
 	
-	@GetMapping("/sign-in")
+	@PostMapping("/sign-in")
 	public ResponseEntity<ResponseBody> signIn(@RequestBody SignIn request){
 		return userService.signIn(request);
 	}

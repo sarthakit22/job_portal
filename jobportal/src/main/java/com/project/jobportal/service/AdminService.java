@@ -1,5 +1,6 @@
 package com.project.jobportal.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +28,27 @@ public class AdminService {
 	
 	
 	public ResponseEntity<ResponseBody> findAll(){
-		List<UserEntity> user=userRepo.findAll();
-		if(user.equals(null)) {
+		List<UserEntity> userList=userRepo.findAll();
+		if(userList.equals(null)) {
 			return ResponseEntity.ok(new ResponseBody("USERS","NOT AVAILABLE",null));
 		}
-		return ResponseEntity.ok(new ResponseBody("YES","AVAILABLE",userRepo.findAll()));
+		List<UserResponse> list=new ArrayList();
+		UserResponse user;
+		for (UserEntity userEntity : userList) {
+			user=new UserResponse();
+			user.setId(userEntity.getId());
+			user.setName(userEntity.getName());
+			user.setDob(userEntity.getDob());
+			user.setAge(userEntity.getAge());
+			user.setMobileNo(userEntity.getMobileNo());
+			user.setEmail(userEntity.getEmail());
+			user.setCity(userEntity.getCity());
+			user.setState(userEntity.getState());
+			user.setRole(userEntity.getRole());
+			user.setApproval(userEntity.getApproval());
+			list.add(user);
+		}
+		return ResponseEntity.ok(new ResponseBody("YES","AVAILABLE",list));
     }
 	
 	
