@@ -80,6 +80,7 @@ public class AdminService {
 	
 	
 	public ResponseEntity<ResponseBody> findUserDetail(Long id) {
+		
 		try{
 			UserEntity user=userRepo.findById(id).get();
 		if(user==null) {
@@ -98,12 +99,15 @@ public class AdminService {
 		user1.setApproval(user.getApproval());
 		return ResponseEntity.ok(new ResponseBody("YES","Details are:",user1));
 		}
+		
 		catch(Exception e) {
 			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
 		}
 	}
 	
+	
 	public ResponseEntity<ResponseBody> adminApproval(Long id) {
+		
 		try {
 		UserEntity user = userRepo.findById(id).get();
 		if(user.equals(null)) {
@@ -113,6 +117,7 @@ public class AdminService {
 		userRepo.save(user);
 		return ResponseEntity.ok(new ResponseBody("YES","APPROVED",user));
 		}
+		
 		catch(Exception e) {
 			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
 		}
