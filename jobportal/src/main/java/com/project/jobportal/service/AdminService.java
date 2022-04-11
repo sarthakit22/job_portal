@@ -80,7 +80,6 @@ public class AdminService {
 	
 	
 	public ResponseEntity<ResponseBody> findUserDetail(Long id) {
-		
 		try{
 			UserEntity user=userRepo.findById(id).get();
 		if(user==null) {
