@@ -68,7 +68,7 @@ public class UserService {
 	public ResponseEntity<ResponseBody> signIn(SignIn request) {
 		if(request.getEmail()!=null) {
 			if(request.getPassword()!=null) {
-				UserEntity login=userRepo.authentication(request.getEmail(), request.getPassword());
+				UserEntity login=userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword());
 				if(login!=null) {
 					return ResponseEntity.ok(new ResponseBody("Success","Login Successfully",login));
 				}

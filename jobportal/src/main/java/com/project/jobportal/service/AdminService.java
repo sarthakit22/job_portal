@@ -30,7 +30,7 @@ public class AdminService {
 	
 	public ResponseEntity<ResponseBody> findAll(){
 		List<UserEntity> userList=userRepo.findAll();
-		if(userList.equals(null)) {
+		if(userList.isEmpty()) {
 			return ResponseEntity.ok(new ResponseBody("USERS","NOT AVAILABLE",null));
 		}
 		List<UserResponse> list=new ArrayList();
@@ -55,7 +55,7 @@ public class AdminService {
 	
 	public ResponseEntity<ResponseBody> findAllPost() {
 		List<HrHiring> hireList=hireRepo.findAll();
-		if(hireList.equals(null)) {
+		if(hireList.isEmpty()) {
 			return ResponseEntity.ok(new ResponseBody("POST JOBS","NOT AVAILABLE",null));
 		}
 		List<PostResponse> list=new ArrayList();
@@ -81,8 +81,7 @@ public class AdminService {
 		UserEntity user=userRepo.findById(id).get();
 		if(user.equals(null)) {
 			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
-		}
-		
+		}		
 		UserResponse user1=new UserResponse();
 		user1.setId(user.getId());
 		user1.setName(user.getName());

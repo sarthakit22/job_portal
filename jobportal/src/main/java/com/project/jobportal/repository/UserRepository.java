@@ -10,6 +10,8 @@ import com.project.jobportal.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
-	  @Query("select u from UserEntity u WHERE u.email=:email and u.password=:password") 
-	  UserEntity authentication(@Param("email") String email, @Param("password") String password);
+//	  @Query("select u from UserEntity u WHERE u.email=:email and u.password=:password") 
+//	  UserEntity authentication(@Param("email") String email, @Param("password") String password);
+	  
+	  UserEntity findByEmailAndPassword(String email,String password);
 }
