@@ -98,7 +98,6 @@ public class AdminService {
 		user1.setApproval(user.getApproval());
 		return ResponseEntity.ok(new ResponseBody("YES","Details are:",user1));
 		}
-		
 		catch(Exception e) {
 			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
 		}
@@ -126,7 +125,7 @@ public class AdminService {
 		return userRepo.findById(id).map(data->{
 			userRepo.delete(data);
 			return ResponseEntity.ok(new ResponseBody("Yes Available","deleted successfully",""));
-			}).orElse(null);
+			}).orElse(ResponseEntity.ok(new ResponseBody("Not Available","Retry","")));
 	}
 
 	
