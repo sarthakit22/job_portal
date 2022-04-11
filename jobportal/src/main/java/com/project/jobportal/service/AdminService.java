@@ -97,11 +97,11 @@ public class AdminService {
 		user1.setRole(user.getRole());
 		user1.setApproval(user.getApproval());
 		return ResponseEntity.ok(new ResponseBody("YES","Details are:",user1));
+		}
+		catch(Exception e) {
+			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
+		}
 	}
-	catch(Exception e) {
-		return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
-    }
-}
 	
 	public ResponseEntity<ResponseBody> adminApproval(Long id) {
 		try {
