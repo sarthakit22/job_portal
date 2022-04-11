@@ -37,10 +37,6 @@ public class UserService {
 		String mobile="(0/91)?[7-9][0-9]{9}";
 		Pattern pattern1=Pattern.compile(mobile);
 		
-		if(request.equals(null)) {
-			return ResponseEntity.ok(new ResponseBody("NO" ,"Enter your details properly",null));
-		}
-		
 		if(request.getEmail().equals(null) || request.getEmail().isEmpty()) {
 			return ResponseEntity.ok(new ResponseBody("NO","Enter Your Email" ,null));
 		}

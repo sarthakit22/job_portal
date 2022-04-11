@@ -2,6 +2,8 @@ package com.project.jobportal.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -78,9 +80,10 @@ public class AdminService {
 	
 	
 	public ResponseEntity<ResponseBody> findUserDetail(Long id) {
-		UserEntity user=userRepo.findById(id).get();
-		if(user.equals(null)) {
-			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
+		try{
+			UserEntity user=userRepo.findById(id).get();
+		if(user==null) {
+		//	return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
 		}		
 		UserResponse user1=new UserResponse();
 		user1.setId(user.getId());
@@ -95,16 +98,24 @@ public class AdminService {
 		user1.setApproval(user.getApproval());
 		return ResponseEntity.ok(new ResponseBody("YES","Details are:",user1));
 	}
-	
+	catch(Exception e) {
+		return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
+    }
+}
 	
 	public ResponseEntity<ResponseBody> adminApproval(Long id) {
+		try {
 		UserEntity user = userRepo.findById(id).get();
 		if(user.equals(null)) {
-			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
+			//return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
 		}
 		user.setApproval("YES");
 		userRepo.save(user);
 		return ResponseEntity.ok(new ResponseBody("YES","APPROVED",user));
+		}
+		catch(Exception e) {
+			return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
+		}
 	}
 
 	
