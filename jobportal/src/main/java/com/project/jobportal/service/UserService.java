@@ -87,8 +87,10 @@ public class UserService {
 	
 	/*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<ResponseBody> applyJob(Long id, Long hr_id, ApplyRequest request) {
+		
+		try {
 		if(request.getCurrentYear().equals(null) && request.getField().equals(null)) {
-			return ResponseEntity.ok(new ResponseBody("","Enter valid year or field",null));
+			//return ResponseEntity.ok(new ResponseBody("","Enter valid year or field",null));
 		}
 		ApplyEntity apply = new ApplyEntity();
 		apply.setId(id);
@@ -97,6 +99,11 @@ public class UserService {
 		apply.setField(request.getField());
 		applyRepo.save(apply);
 		return ResponseEntity.ok(new ResponseBody("Applied Your id is:","Send your Resume to hr@gmail.com",apply.getApplyId()));
+		}
+		
+		catch(Exception e) {
+			return ResponseEntity.ok(new ResponseBody("","Enter valid year or field",null));
+		}
 	}
 
 
@@ -115,9 +122,8 @@ public class UserService {
 		userRepo.save(user);
 		return ResponseEntity.ok(new ResponseBody("Updated","Successfully",""));
 		}
-		else {
-			return ResponseEntity.ok(new ResponseBody("Sorry","Enter Correct Details",""));
-		}
+	
+		return ResponseEntity.ok(new ResponseBody("Sorry","Enter Correct Details",""));
 	}
 
 	
@@ -135,4 +141,5 @@ public class UserService {
 		userRepo.save(user);
 		return ResponseEntity.ok(new ResponseBody("Password Updated","Successfully",""));
 	}
+	
 }

@@ -106,7 +106,7 @@ public class AdminService {
 	}
 	
 	
-	public ResponseEntity<ResponseBody> adminApproval(Long id) {
+	public ResponseEntity<ResponseBody> adminApproval(Long id){
 		
 		try {
 		UserEntity user = userRepo.findById(id).get();
