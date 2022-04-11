@@ -82,7 +82,7 @@ public class AdminService {
 	public ResponseEntity<ResponseBody> findUserDetail(Long id) {
 		try{
 			UserEntity user=userRepo.findById(id).get();
-		if(user==null) {
+		if(user.equals(null)) {
 		//	return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));
 		}		
 		UserResponse user1=new UserResponse();
@@ -106,7 +106,6 @@ public class AdminService {
 	
 	
 	public ResponseEntity<ResponseBody> adminApproval(Long id){
-		
 		try {
 		UserEntity user = userRepo.findById(id).get();
 		if(user.equals(null)) {
