@@ -107,6 +107,10 @@ public class AdminService {
 	
 	public ResponseEntity<ResponseBody> adminApproval(Long id){
 		try {
+//			if(id.equals(null)) {
+//				return ResponseEntity.ok(new ResponseBody("No","Enter id",null));
+//			}
+			
 		UserEntity user = userRepo.findById(id).get();
 		if(user.equals(null)) {
 			//return ResponseEntity.ok(new ResponseBody("NO","NOT AVAILABLE",null));

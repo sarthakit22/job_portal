@@ -32,7 +32,7 @@ public class AdminController {
 			   "6-> /only-apply-details";
 	}
 	
-	@GetMapping("/all-user")
+	@GetMapping("/all-users")
 	public ResponseEntity<?> findAlll(){
 		return adminService.findAll();	
 	}

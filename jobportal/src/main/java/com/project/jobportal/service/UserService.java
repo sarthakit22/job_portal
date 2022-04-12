@@ -48,13 +48,6 @@ public class UserService {
 			return ResponseEntity.ok(new ResponseBody("NO","Enter valid Mobile No.:" ,null));
 		}
 		
-//		if(request.equals("")) {
-//			return ResponseEntity.ok(new ResponseBody("NO","Enter all details" ,null));
-//		}
-		
-//		if(request.getEmail().equals(null) || request.getEmail().isEmpty()) {
-//			return ResponseEntity.ok(new ResponseBody("NO","Enter Your Email" ,null));
-//		}
 			UserEntity user = new UserEntity();
 			user.setName(request.getName());
 			user.setDob(request.getDob());
@@ -73,12 +66,12 @@ public class UserService {
 	
 	/*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<ResponseBody> signIn(SignIn request) {
-//		if(request.getEmail()==null && request.getEmail().isEmpty()) {
-//			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
-//		}
-//		if(request.getPassword()==null && request.getPassword().isEmpty()) {
-//			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
-//		}
+		if(request.getEmail()==null && request.getEmail().isEmpty()) {
+			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
+		}
+		if(request.getPassword()==null && request.getPassword().isEmpty()) {
+			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
+		}
 		
 			UserEntity login=userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword());
 			if(login!=null) {
