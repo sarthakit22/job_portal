@@ -1,6 +1,7 @@
 package com.project.jobportal.service;
 
 import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import com.project.jobportal.request.SignIn;
 import com.project.jobportal.request.UpdateRequest;
 import com.project.jobportal.request.UserRequest;
 import com.project.jobportal.response.ResponseBody;
+import com.project.jobportal.response.UserResponse;
 
 @Service
 public class UserService {
@@ -37,13 +39,21 @@ public class UserService {
 		String mobile="(0/91)?[7-9][0-9]{9}";
 		Pattern pattern1=Pattern.compile(mobile);
 		
-		if(request.getEmail().equals(null) || request.getEmail().isEmpty()) {
-			return ResponseEntity.ok(new ResponseBody("NO","Enter Your Email" ,null));
+		if(!pattern.matcher(request.getEmail()).matches()){
+			return ResponseEntity.ok(new ResponseBody("NO","Enter valid Email ID:" ,null));
 		}
-	    
-		if(!( (pattern.matcher(request.getEmail()).matches()) && (pattern1.matcher(request.getMobileNo()).matches()) )){
-			return ResponseEntity.ok(new ResponseBody("NO","Enter valid Email ID or Mobile No.:" ,null));
+		
+		if(!pattern1.matcher(request.getMobileNo()).matches()){
+			return ResponseEntity.ok(new ResponseBody("NO","Enter valid Mobile No.:" ,null));
 		}
+		
+//		if(request.equals("")) {
+//			return ResponseEntity.ok(new ResponseBody("NO","Enter all details" ,null));
+//		}
+		
+//		if(request.getEmail().equals(null) || request.getEmail().isEmpty()) {
+//			return ResponseEntity.ok(new ResponseBody("NO","Enter Your Email" ,null));
+//		}
 			UserEntity user = new UserEntity();
 			user.setName(request.getName());
 			user.setDob(request.getDob());
@@ -62,24 +72,40 @@ public class UserService {
 	
 	/*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<ResponseBody> signIn(SignIn request) {
-		if(request.getEmail()!=null) {
-			if(request.getPassword()!=null) {
-				UserEntity login=userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword());
-				if(login!=null) {
-					return ResponseEntity.ok(new ResponseBody("Success","Login Successfully",login));
-				}
-				return ResponseEntity.ok(new ResponseBody("Oops","You have not registered:",""));
+//		if(request.getEmail()==null && request.getEmail().isEmpty()) {
+//			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
+//		}
+//		if(request.getPassword()==null && request.getPassword().isEmpty()) {
+//			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
+//		}
+		
+			UserEntity login=userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword());
+			if(login!=null) {
+				UserResponse user=new UserResponse();
+				user.setId(login.getId());			
+				user.setName(login.getName());
+				user.setDob(login.getDob());
+				user.setAge(login.getAge());
+				user.setMobileNo(login.getMobileNo());
+				user.setEmail(login.getEmail());
+				user.setCity(login.getCity());
+				user.setState(login.getState());
+				user.setRole(login.getRole());
+				user.setApproval(login.getApproval());
+				return ResponseEntity.ok(new ResponseBody("Success","Login Successfully",user));
 			}
-			return ResponseEntity.ok(new ResponseBody("Oops","Enter Password",""));
-		}
-		return ResponseEntity.ok(new ResponseBody("Oops","Enter Email",""));
+			return ResponseEntity.ok(new ResponseBody("Oops","You have not registered:",""));
 	}
 
 	
 	/*----------------------------------------------------------------------------------------------*/
+	//error
 	public ResponseEntity<ResponseBody> showJob(String branch,String experience) {
-		if(branch==null && experience==null) {
-			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct branch or experience",""));
+		if(branch==null || branch=="") {
+			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct branch",""));
+		}
+		if(experience==null || experience=="") {
+			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct experience",""));
 		}
 		return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",hiringrepo.branchEx(branch,experience)));
 	}
