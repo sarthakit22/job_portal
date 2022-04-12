@@ -102,9 +102,9 @@ public class UserService {
 //			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct experience",""));
 //		}
 		
-		HrHiring hire=hiringrepo.branchEx(branch,experience);
-		if(hire!=null) {
-			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",""));
+		HrHiring job=hiringrepo.branchEx(branch,experience);
+		if(job!=null) {
+			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",job));
 		}
 		return ResponseEntity.ok(new ResponseBody("NOT AVAILABLE","Try with Different branch and experience",null));
 	}
@@ -134,7 +134,7 @@ public class UserService {
 
 	/*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<ResponseBody> update(Long id, UpdateRequest request) {
-		if(request!=null) {
+		
 		UserEntity user = userRepo.findById(id).get(); 
 		user.setName(request.getName());
 		user.setDob(request.getDob());
@@ -143,20 +143,17 @@ public class UserService {
 		user.setEmail(request.getEmail());
 		user.setCity(request.getCity());
 		user.setState(request.getState());
-		user.setRole(request.getRole());
 		userRepo.save(user);
 		return ResponseEntity.ok(new ResponseBody("Updated","Successfully",""));
-		}
-	
-		return ResponseEntity.ok(new ResponseBody("Sorry","Enter Correct Details",""));
 	}
 
 	
 	/*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<?> updatePassword(Long id, PasswordRequest request) {
-		if(request.getPassword().equals(null)) {
-			return ResponseEntity.ok(new ResponseBody("No","Enter Paswword properly",""));
-		}
+//		if(request.getPassword().equals(null)) {
+//			return ResponseEntity.ok(new ResponseBody("No","Enter Paswword properly",""));
+//		}
+		
 		UserEntity user = userRepo.findById(id).get();
 		if(user.equals(null)) {
 			return ResponseEntity.ok(new ResponseBody("No","Enter Correct Id:",""));
@@ -165,6 +162,15 @@ public class UserService {
 		user.setId(id);
 		userRepo.save(user);
 		return ResponseEntity.ok(new ResponseBody("Password Updated","Successfully",""));
+	}
+
+
+	public ResponseEntity<ResponseBody> showProfile(Long id) {
+		UserEntity user=userRepo.findById(id).get();
+		if(user==null) {
+			return ResponseEntity.ok(new ResponseBody("No","Not Available",null));
+		}
+		return ResponseEntity.ok(new ResponseBody("Yes","Available",user));		
 	}
 	
 }

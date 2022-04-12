@@ -14,7 +14,7 @@ public class UpdateRequest {
 	private String email;
 	private String city;
 	private String state;
-	private String role;
+	
 	public String getName() {
 		return name;
 	}
@@ -56,12 +56,6 @@ public class UpdateRequest {
 	}
 	public void setState(String state) {
 		this.state = state;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
 	}
 	
 	

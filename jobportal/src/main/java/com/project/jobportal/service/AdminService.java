@@ -137,23 +137,23 @@ public class AdminService {
 	public ResponseEntity<?> applyDetails() {
 		List<ApplyEntity> applyEntityList = applyRepo.findAll();
 		
-		List<ApplyResponse> applyList= new ArrayList();
-		ApplyResponse applyResponse;
-		for (ApplyEntity applyEntity : applyEntityList) {
-			
-			applyResponse=new ApplyResponse();
-			UserEntity hr= userRepo.findById(applyEntity.getHrId()).get();
-			UserEntity candidate= userRepo.findById(applyEntity.getId()).get();
-			
-			applyResponse.setApplyId(applyEntity.getApplyId());
-			applyResponse.setCurrentYear(applyEntity.getCurrentYear());
-			applyResponse.setField(applyEntity.getField());
-			applyResponse.setHrName(hr.getName());
-			applyResponse.setCandidateName(candidate.getName());
-			applyList.add(applyResponse);	
-		}
+//		List<ApplyResponse> applyList= new ArrayList();
+//		ApplyResponse applyResponse;
+//		for (ApplyEntity applyEntity : applyEntityList) {
+//			
+//			applyResponse=new ApplyResponse();
+//			UserEntity hr= userRepo.findById(applyEntity.getHrId()).get();
+//			UserEntity candidate= userRepo.findById(applyEntity.getId()).get();
+//			
+//			applyResponse.setApplyId(applyEntity.getApplyId());
+//			applyResponse.setCurrentYear(applyEntity.getCurrentYear());
+//			applyResponse.setField(applyEntity.getField());
+//			applyResponse.setHrName(hr.getName());
+//			applyResponse.setCandidateName(candidate.getName());
+//			applyList.add(applyResponse);	
+//		}
 		
-		return ResponseEntity.ok(new ResponseBody("All Aplly Details","Hello Boss",applyList));
+		return ResponseEntity.ok(new ResponseBody("All Aplly Details","Hello Boss",applyEntityList));
 	}
 	
 }

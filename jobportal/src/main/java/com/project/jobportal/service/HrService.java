@@ -44,7 +44,7 @@ public class HrService {
 	
 	public ResponseEntity<ResponseBody> showHr(Long id) {
 		
-		Optional<UserEntity> hire=userRepo.findById(id);
+		Optional<HrHiring> hire=hireRepo.findById(id);
 		if(hire!=null) {
 			return ResponseEntity.ok(new ResponseBody("welcome","Your post job details:",hire));
 		}
@@ -57,7 +57,7 @@ public class HrService {
 		return hireRepo.findById(hrId).map(data->{
 			hireRepo.delete(data);
 			return ResponseEntity.ok(new ResponseBody("Yes Available","deleted successfully",""));
-			}).orElse(null);
+			}).orElse(ResponseEntity.ok(new ResponseBody("Not Available","","")));
 	}	
 }
 

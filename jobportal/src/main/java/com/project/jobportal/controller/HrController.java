@@ -26,7 +26,7 @@ public class HrController {
 	public String hr() {
 		return "1-> /post-job"+ "\n" +
 			   "2-> /update-details"+"\n"
-			   +"3-> /show-hr profile with post details"+"\n"
+			   +"3-> /show post details"+"\n"
 			   +"4-> /show-profile"+"\n"+
 			   "5-> /delete-post-job";
 	}
@@ -36,7 +36,7 @@ public class HrController {
 		return hrService.hiringInput(id, request);		
 	}
 	
-	@GetMapping("/show-hr")
+	@GetMapping("/show-postjob")
 	public ResponseEntity<?> showHr(@RequestParam Long id){
 		return hrService.showHr(id);		
 	}

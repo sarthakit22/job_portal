@@ -45,6 +45,11 @@ public class UserController {
 		
 	}
 	
+	@GetMapping("/show-profile")
+	public ResponseEntity<?> showProfile(@RequestParam Long id){
+		return userService.showProfile(id);
+	}
+	
 	@GetMapping("/filter-job")
 	public ResponseEntity<?> showJob(@RequestParam String branch,@RequestParam String experience){
 		return userService.showJob(branch,experience);			
