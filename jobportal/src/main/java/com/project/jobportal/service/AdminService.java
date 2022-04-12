@@ -132,15 +132,16 @@ public class AdminService {
 
 	
 	public ResponseEntity<?> applyDetails() {
-		try {
 		List<ApplyEntity> applyEntityList = applyRepo.findAll();
 		
 		List<ApplyResponse> applyList= new ArrayList();
 		ApplyResponse applyResponse;
 		for (ApplyEntity applyEntity : applyEntityList) {
+			
 			applyResponse=new ApplyResponse();
 			UserEntity hr= userRepo.findById(applyEntity.getHrId()).get();
 			UserEntity candidate= userRepo.findById(applyEntity.getId()).get();
+			
 			applyResponse.setApplyId(applyEntity.getApplyId());
 			applyResponse.setCurrentYear(applyEntity.getCurrentYear());
 			applyResponse.setField(applyEntity.getField());
@@ -150,10 +151,6 @@ public class AdminService {
 		}
 		
 		return ResponseEntity.ok(new ResponseBody("All Aplly Details","Hello Boss",applyList));
-		}
-		catch (Exception e) {
-			return ResponseEntity.ok(new ResponseBody("No details Found","Hello Boss",""));
-		}
 	}
 	
 }
