@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.jobportal.entity.ApplyEntity;
+import com.project.jobportal.entity.HrHiring;
 import com.project.jobportal.entity.UserEntity;
 import com.project.jobportal.repository.ApplyRepository;
 import com.project.jobportal.repository.HiringRepository;
@@ -101,13 +102,18 @@ public class UserService {
 	/*----------------------------------------------------------------------------------------------*/
 	//error
 	public ResponseEntity<ResponseBody> showJob(String branch,String experience) {
-		if(branch==null || branch=="") {
-			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct branch",""));
+//		if(branch==null || branch=="") {
+//			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct branch",""));
+//		}
+//		if(experience==null || experience=="") {
+//			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct experience",""));
+//		}
+		
+		HrHiring hire=hiringrepo.branchEx(branch,experience);
+		if(hire!=null) {
+			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",""));
 		}
-		if(experience==null || experience=="") {
-			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct experience",""));
-		}
-		return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",hiringrepo.branchEx(branch,experience)));
+		return ResponseEntity.ok(new ResponseBody("NOT AVAILABLE","Try with Different branch and experience",null));
 	}
 
 	
