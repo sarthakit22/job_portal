@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.project.jobportal.entity.ApplyEntity;
 import com.project.jobportal.entity.HrHiring;
 import com.project.jobportal.entity.UserEntity;
 import com.project.jobportal.repository.ApplyRepository;
 import com.project.jobportal.repository.HiringRepository;
 import com.project.jobportal.repository.UserRepository;
+import com.project.jobportal.response.ApplyResponse;
 import com.project.jobportal.response.PostResponse;
 import com.project.jobportal.response.ResponseBody;
 import com.project.jobportal.response.UserResponse;
@@ -130,7 +132,28 @@ public class AdminService {
 
 	
 	public ResponseEntity<?> applyDetails() {
-		return ResponseEntity.ok(new ResponseBody("All Aplly Details","Hello Boss",applyRepo.findAll()));
+		try {
+		List<ApplyEntity> applyEntityList = applyRepo.findAll();
+		
+		List<ApplyResponse> applyList= new ArrayList();
+		ApplyResponse applyResponse;
+		for (ApplyEntity applyEntity : applyEntityList) {
+			applyResponse=new ApplyResponse();
+			UserEntity hr= userRepo.findById(applyEntity.getHrId()).get();
+			UserEntity candidate= userRepo.findById(applyEntity.getId()).get();
+			applyResponse.setApplyId(applyEntity.getApplyId());
+			applyResponse.setCurrentYear(applyEntity.getCurrentYear());
+			applyResponse.setField(applyEntity.getField());
+			applyResponse.setHrName(hr.getName());
+			applyResponse.setCandidateName(candidate.getName());
+			applyList.add(applyResponse);	
+		}
+		
+		return ResponseEntity.ok(new ResponseBody("All Aplly Details","Hello Boss",applyList));
+		}
+		catch (Exception e) {
+			return ResponseEntity.ok(new ResponseBody("No details Found","Hello Boss",""));
+		}
 	}
 	
 }
