@@ -44,13 +44,18 @@ public class UserEntity {
 	@JoinColumn(name="id")
 	private List<HrHiring> hiring;
 
+	@OneToMany
+	@JoinColumn(name="id")
+	private List<ApplyEntity> applyDetails;
+
 	public UserEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public UserEntity(Long id, String name, String dob, String age, String mobileNo, String email, String city,
-			String state, String password, String role, String approval, List<HrHiring> hiring) {
+			String state, String password, String role, String approval, List<HrHiring> hiring,
+			List<ApplyEntity> applyDetails) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,6 +69,7 @@ public class UserEntity {
 		this.role = role;
 		this.approval = approval;
 		this.hiring = hiring;
+		this.applyDetails = applyDetails;
 	}
 
 	public Long getId() {
@@ -162,11 +168,20 @@ public class UserEntity {
 		this.hiring = hiring;
 	}
 
+	public List<ApplyEntity> getApplyDetails() {
+		return applyDetails;
+	}
+
+	public void setApplyDetails(List<ApplyEntity> applyDetails) {
+		this.applyDetails = applyDetails;
+	}
+
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", name=" + name + ", dob=" + dob + ", age=" + age + ", mobileNo=" + mobileNo
 				+ ", email=" + email + ", city=" + city + ", state=" + state + ", password=" + password + ", role="
-				+ role + ", approval=" + approval + ", hiring=" + hiring + "]";
-	}	
+				+ role + ", approval=" + approval + ", hiring=" + hiring + ", applyDetails=" + applyDetails + "]";
+	}
 	
-		}
+	
+}
