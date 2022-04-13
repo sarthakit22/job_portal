@@ -31,11 +31,13 @@ public class UserController {
 	
 	@GetMapping("/user")
 	public String user() {
-		return "1-> /filter-job" + "\n"+ 
-			   "2-> /apply-job" + "\n" +
-			   "3-> /update-details"  + "\n" +
-			   "4-> /update-password" +"\n" +
-			   "5-> /show-profile";
+		return "1-> /sign-up" + "\n"+
+				"2-> /sign-in"+"\n"+
+				"3-> /filter-job"+"\n"+
+			   "4-> /apply-job" + "\n" +
+			   "5-> /update-details"  + "\n" +
+			   "6-> /update-password" +"\n" +
+			   "7-> /show-profile";
 	}
 	
 	@PostMapping("/apply-job")

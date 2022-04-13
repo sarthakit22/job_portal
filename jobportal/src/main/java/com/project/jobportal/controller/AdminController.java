@@ -24,12 +24,15 @@ public class AdminController {
 	//trial
 	@GetMapping("/admin")
 	public String admin() {
-		return "1-> /all-user"+ "\n"+ 
-			   "2-> /only-post-jobs"+ "\n"+
-			   "3-> /unique-user-detail"+ "\n"+
-			   "4-> /admin-approval"+ "\n"+
-			   "5-> /delete-details"+"\n"+
-			   "6-> /only-apply-details";
+		return "1-> /sign-in"+ "\n"+ 
+				"2-> /all-users"+"\n"+
+			    "3-> /only-post-jobs"+ "\n"+
+			   "4-> /unique-user-detail"+ "\n"+
+			   "5-> /admin-approval"+ "\n"+
+			   "6-> /delete-details"+"\n"+         //before approval
+			   "7-> /only-apply-details"+"\n"+
+			   "8-> /update-details"+"\n"+
+			   "9-> /update-password";
 	}
 	
 	@GetMapping("/all-users")

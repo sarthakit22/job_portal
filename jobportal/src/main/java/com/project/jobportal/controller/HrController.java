@@ -24,11 +24,14 @@ public class HrController {
 	
 	@GetMapping("/hr")
 	public String hr() {
-		return "1-> /post-job"+ "\n" +
-			   "2-> /update-details"+"\n"
-			   +"3-> /show post details"+"\n"
+		return "1-> /sign-in"+ "\n" +
+			   "2-> /sign-up"+"\n"
+			   +"3-> /update-details"+"\n"
 			   +"4-> /show-profile"+"\n"+
-			   "5-> /delete-post-job";
+			   "5-> /delete-post-job"+"\n"+
+			   "6-> /post-job"+"\n"+
+			   "7-> /show-post-job"+"\n"+
+			   "8-> check all apply details";
 	}
 	
 	@PostMapping("/post-job")
