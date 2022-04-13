@@ -66,11 +66,11 @@ public class UserService {
 	
 	/*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<ResponseBody> signIn(SignIn request) {
-		if(request.getEmail()==null && request.getEmail().isEmpty()) {
+		if(request.getEmail()==null) {
 			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
 		}
-		if(request.getPassword()==null && request.getPassword().isEmpty()) {
-			return ResponseEntity.ok(new ResponseBody("NO","Enter Email",null));
+		if(request.getPassword()==null) {
+			return ResponseEntity.ok(new ResponseBody("NO","Enter Password",null));
 		}
 		
 			UserEntity login=userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword());
@@ -95,6 +95,12 @@ public class UserService {
 	/*----------------------------------------------------------------------------------------------*/
 	//error
 	public ResponseEntity<ResponseBody> showJob(String branch,String experience) {
+		
+		HrHiring job=hiringrepo.branchEx(branch,experience);
+		if(job!=null) {
+			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",job));
+		}
+		return ResponseEntity.ok(new ResponseBody("NOT AVAILABLE","Try with Different branch and experience",null));
 //		if(branch==null || branch=="") {
 //			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct branch",""));
 //		}
@@ -102,11 +108,6 @@ public class UserService {
 //			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct experience",""));
 //		}
 		
-		HrHiring job=hiringrepo.branchEx(branch,experience);
-		if(job!=null) {
-			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",job));
-		}
-		return ResponseEntity.ok(new ResponseBody("NOT AVAILABLE","Try with Different branch and experience",null));
 	}
 
 	
