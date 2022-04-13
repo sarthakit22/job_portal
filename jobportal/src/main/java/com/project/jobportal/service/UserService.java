@@ -1,5 +1,6 @@
 package com.project.jobportal.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,7 @@ import com.project.jobportal.request.SignIn;
 import com.project.jobportal.request.UpdateRequest;
 import com.project.jobportal.request.UserRequest;
 import com.project.jobportal.response.ResponseBody;
+import com.project.jobportal.response.ShowJobResponse;
 import com.project.jobportal.response.UserResponse;
 
 @Service
@@ -98,9 +100,25 @@ public class UserService {
 	//error
 	public ResponseEntity<ResponseBody> showJob(String branch,String experience) {
 		
-		List<HrHiring> job=hiringrepo.branchEx(branch,experience);
-		if(job!=null) {
-			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",job));
+		List<HrHiring> jobList=hiringrepo.branchEx(branch,experience);
+		if(jobList!=null) {
+			
+			ShowJobResponse job;
+			List<ShowJobResponse> list=new ArrayList();
+			for (HrHiring job1 : jobList) {
+				job=new ShowJobResponse();
+				job.setHrId(job1.getHrId());
+				job.setBranch(job1.getBranch());
+				job.setRole(job1.getRole());
+				job.setWorkingHours(job1.getWorkingHours());
+				job.setDateOfPosting(job1.getDateOfPosting());
+				job.setNoOfApplicants(job1.getNoOfApplicants());
+				job.setCtc(job1.getCtc());
+				job.setLocation(job1.getLocation());
+				job.setExperience(job1.getExperience());
+				list.add(job);
+			}
+			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",list));
 		}
 		return ResponseEntity.ok(new ResponseBody("NOT AVAILABLE","Try with Different branch and experience",null));
 
