@@ -21,7 +21,7 @@ public class HrHiring {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long hrId;
+	private Long hrId;
 	private String branch;
 	private String role;
 	private String workingHours;

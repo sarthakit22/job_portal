@@ -23,7 +23,7 @@ public class UserEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String name;
 	private String dob;
 	private String age;
@@ -49,7 +49,7 @@ public class UserEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserEntity(long id, String name, String dob, String age, String mobileNo, String email, String city,
+	public UserEntity(Long id, String name, String dob, String age, String mobileNo, String email, String city,
 			String state, String password, String role, String approval, List<HrHiring> hiring) {
 		super();
 		this.id = id;
@@ -66,11 +66,11 @@ public class UserEntity {
 		this.hiring = hiring;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

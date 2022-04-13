@@ -19,23 +19,23 @@ public class ApplyEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long applyId;
+	private Long applyId;
 	
 	private String currentYear;
 	private String field;
 	
 	@Column(name="hr_id")  //hiring-id
-	private long hrId;
+	private Long hrId;
 	
 	@Column(name="id")
-	private long id;    //user-id--for ADMIN,HR,USER
+	private Long id;    //user-id--for ADMIN,HR,USER
 
 	public ApplyEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApplyEntity(long applyId, String currentYear, String field, long hrId, long id) {
+	public ApplyEntity(Long applyId, String currentYear, String field, Long hrId, Long id) {
 		super();
 		this.applyId = applyId;
 		this.currentYear = currentYear;
@@ -44,11 +44,11 @@ public class ApplyEntity {
 		this.id = id;
 	}
 
-	public long getApplyId() {
+	public Long getApplyId() {
 		return applyId;
 	}
 
-	public void setApplyId(long applyId) {
+	public void setApplyId(Long applyId) {
 		this.applyId = applyId;
 	}
 
@@ -68,19 +68,19 @@ public class ApplyEntity {
 		this.field = field;
 	}
 
-	public long getHrId() {
+	public Long getHrId() {
 		return hrId;
 	}
 
-	public void setHrId(long hrId) {
+	public void setHrId(Long hrId) {
 		this.hrId = hrId;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
