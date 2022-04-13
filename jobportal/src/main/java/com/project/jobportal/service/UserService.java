@@ -101,6 +101,7 @@ public class UserService {
 			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",job));
 		}
 		return ResponseEntity.ok(new ResponseBody("NOT AVAILABLE","Try with Different branch and experience",null));
+
 //		if(branch==null || branch=="") {
 //			ResponseEntity.ok(new ResponseBody("Sorry","Enter correct branch",""));
 //		}
