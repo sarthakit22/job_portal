@@ -1,5 +1,6 @@
 package com.project.jobportal.service;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 
@@ -97,7 +98,7 @@ public class UserService {
 	//error
 	public ResponseEntity<ResponseBody> showJob(String branch,String experience) {
 		
-		HrHiring job=hiringrepo.branchEx(branch,experience);
+		List<HrHiring> job=hiringrepo.branchEx(branch,experience);
 		if(job!=null) {
 			return ResponseEntity.ok(new ResponseBody("YES AVAILABLE","Listed",job));
 		}

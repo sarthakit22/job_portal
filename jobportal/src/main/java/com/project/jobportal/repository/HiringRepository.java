@@ -13,6 +13,6 @@ import com.project.jobportal.entity.HrHiring;
 public interface  HiringRepository extends JpaRepository<HrHiring, Long> {
 	
 	@Query("select u from HrHiring u WHERE u.branch=:branch and u.experience=:experience") 
-	HrHiring branchEx(@Param("branch") String branch, @Param("experience") String experience);
+	List<HrHiring> branchEx(@Param("branch") String branch, @Param("experience") String experience);
 
 }
