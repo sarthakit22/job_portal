@@ -3,6 +3,7 @@ package com.project.jobportal.entity;
 import java.util.List;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,5 +57,7 @@ public class UserEntity {
 	@JoinColumn(name="id")
 	private List<ApplyEntity> applyDetails;
 
+	
+	
 	
 }
