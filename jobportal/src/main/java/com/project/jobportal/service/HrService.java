@@ -43,7 +43,6 @@ public class HrService {
 
 	
 	public ResponseEntity<ResponseBody> showHr(Long id) {
-		
 		Optional<HrHiring> hire=hireRepo.findById(id);
 		if(hire!=null) {
 			return ResponseEntity.ok(new ResponseBody("welcome","Your post job details:",hire));
