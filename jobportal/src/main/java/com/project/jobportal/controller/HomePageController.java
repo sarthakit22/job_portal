@@ -2,6 +2,7 @@ package com.project.jobportal.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,4 +17,39 @@ public class HomePageController {
 				"GET-/sign-in"+"\n"+"POST-/sign-up";
 	}
 ////hello
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//@GetMapping("/path/{user}")
+//public String path(@PathVariable String user) {
+//	return user;
+//}

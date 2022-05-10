@@ -36,6 +36,7 @@ public class UserService {
 	@Autowired
 	ApplyRepository applyRepo;
 	
+	
     /*----------------------------------------------------------------------------------------------*/
 	public ResponseEntity<ResponseBody> signUp(UserRequest request) {
 		String email1="^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
